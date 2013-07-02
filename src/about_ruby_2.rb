@@ -9,7 +9,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # For OpenStructs
 require 'ostruct'
 
-class AboutArrays < Neo::Koan
+class AboutRuby2 < Neo::Koan
 
   def test_openstructs_behave_like_hashes
     person = OpenStruct.new

@@ -5,7 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # in a separate file so that the "out of range values returns nil"
 # functionality is fully shown
 
-class AboutArrays < Neo::Koan
+class AboutListValues < Neo::Koan
 
   def test_out_of_range_value_returns_nil
     array = [1, 2, 3, 4, 5]
