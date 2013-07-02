@@ -83,9 +83,12 @@ class AboutArrays < Neo::Koan
 
   def test_out_of_range_value_returns_nil
     array = [1, 2, 3, 4, 5]
-    new_array = array.values_at(3..5)
+
+    new_array = array.values_at(3..5)  
+    assert_equal __([4, 5, nil]), new_array
     
-    assert_equal __([nil, nil, 3, 4, 5]), new_array
+    different_array = array.values_at(3..7)
+    assert_equal __([4, 5, nil, nil, nil]), different_array
   end
 
 end
