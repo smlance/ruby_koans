@@ -2,6 +2,9 @@
 
 $LOAD_PATH << File.dirname(__FILE__)
 
+in_ruby_version("2") do
+  require 'about_ruby_2.rb' # To be put into other files later
+end
 require 'about_asserts'
 require 'about_nil'
 require 'about_objects'
