@@ -2,9 +2,8 @@
 
 $LOAD_PATH << File.dirname(__FILE__)
 
-in_ruby_version("2") do
-  require 'about_ruby_2.rb' # To be put into other files later
-end
+# NOTE: For some strange reason, you cannot put in_ruby_version("2")
+# at the beginning of the file, or it throws NoMethodError
 require 'about_asserts'
 require 'about_nil'
 require 'about_objects'
@@ -45,3 +44,6 @@ in_ruby_version("jruby") do
   require 'about_java_interop'
 end
 require 'about_extra_credit'
+in_ruby_version("2") do
+  require 'about_ruby_2.rb' # To be put into other files later
+end
