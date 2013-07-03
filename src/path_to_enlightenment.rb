@@ -10,9 +10,6 @@ require 'about_objects'
 require 'about_arrays'
 require 'about_array_assignment'
 require 'about_hashes'
-in_ruby_version("2") do
-  require 'about_list_values' # Name subject to change
-end
 require 'about_strings'
 require 'about_symbols'
 require 'about_regular_expressions'
@@ -44,6 +41,3 @@ in_ruby_version("jruby") do
   require 'about_java_interop'
 end
 require 'about_extra_credit'
-in_ruby_version("2") do
-  require 'about_ruby_2.rb' # To be put into other files later
-end
