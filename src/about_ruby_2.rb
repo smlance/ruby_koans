@@ -11,6 +11,7 @@ require 'ostruct'
 
 class AboutRuby2 < Neo::Koan
 
+  # OPENSTRUCT'S HASH-LIKE BEHAVIOR
   def test_openstructs_behave_like_hashes
     person = OpenStruct.new
     person.name = "Joe"
@@ -78,6 +79,7 @@ class AboutRuby2 < Neo::Koan
 
   # ------------------------------------------------------------------
 
+  # MODULE PREPEND
   class Dog
     prepend Nameable # The crucial change; prepend rather than include
 
@@ -104,6 +106,7 @@ class AboutRuby2 < Neo::Koan
 
   # ------------------------------------------------------------------
 
+  # SYMBOL ARRAY LITERALS
   def test_symbol_array_literals
     item = %i{ monday tuesday wednesday }
     assert_equal __([:monday, :tuesday, :wednesday]), item
@@ -114,13 +117,59 @@ class AboutRuby2 < Neo::Koan
 
   def test_symbol_array_literals_with_interpolation
     item = %I{ #{"monday" + " tuesday"} wednesday }
-    # Note the capital 'i' for interpolation!
+      # Note the capital 'i' for interpolation!
 
-    assert_equal __([:"monday tuesday", :wednesday]), item
+      assert_equal __([:"monday tuesday", :wednesday]), item
+    end
+
+    # ------------------------------------------------------------------
+
+    # REFINEMENTS
+    class Dog
+
+      attr_reader :name
+
+      def initialize
+        @name = "Fido"
+      end
+
+      def bark
+        "WOOF"
+      end
+
+      def here
+        :in_object
+      end
+    end
+
+    module ActsLikeTiger
+
+      refine Dog do
+        def bark
+          "ROAR"
+        end
+
+        def runs_fast
+          true
+        end
+      end
+
+    end
+
+    def test_refinements_not_normally_visible
+      fido = Dog.new
+
+      assert_equal __("WOOF"), fido.bark
+      assert_equal __(false), fido.runs_fast
+      # TODO: Need to implement NoMethodError in this part of the code...
+    end
+
+    def test_refinements_require_module_use
+      using ActsLikeTiger
+      fido = Dog.new
+
+      assert_equal __("ROAR"), fido.bark
+      assert_equal __(true), fido.runs_fast
+    end
+
   end
-
-  # ------------------------------------------------------------------
-
-
-
-end

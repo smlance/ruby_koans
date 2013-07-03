@@ -1,12 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-# Need to add:
-# - Global variables ($)
-# - Constant variable access from anywhere
-# - Constant variable reassignment
-# - Instance variables? (Though these are demonstrated in about_class*.rb)
-# - Class variables (@@) (Also demonstrated in about_class*.rb?)
-
 class AboutScope < Neo::Koan
   module Jims
     class Dog
