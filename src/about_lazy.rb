@@ -14,7 +14,7 @@ class AboutLazy < Neo::Koan
 
 	def test_infinite_range 
 		range = 1..Float::INFINITY
-		collection = range.lazy.collect { |x| x }.first(5)
+		collection = range.lazy.collect{ |x| x }.first(5)
 		# collection is an array
 		assert_equal __([1, 2, 3, 4, 5]), collection
 	end 
@@ -26,8 +26,19 @@ class AboutLazy < Neo::Koan
 	end
 
 	def test_lazy_select
-    nums = Num.new 
+    num = Num.new
 
-    num.enum_for(:evens).lazy.select{|i| i < 3 }.take(__(2)).each{|i| p i} # => 0, 2
+    enums = []
+    num.enum_for(:evens).lazy.select{|i| i < 3 }.take(2).each{|i| enums << i} 
+    assert_equal __([0, 2]), enums
+  end
+
+  def test_lazy_again
+    num = Num.new
+
+    enums = []
+    # How can we assure that this does not go into an infinite loop?
+    num.enum_for(:evens).__(lazy).select{|i| i < 5 }.take(3).each{|i| enums << i} 
+    assert_equal __([0, 2, 4]), enums
 	end
 end
