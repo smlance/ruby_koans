@@ -29,7 +29,7 @@ class AboutLazy < Neo::Koan
     num = Num.new
 
     enums = []
-    num.enum_for(:evens).lazy.select{|i| i < 3 }.take(2).each{|i| enums << i} 
+    num.enum_for(:even).lazy.select{|i| i < 3 }.take(2).each{|i| enums << i} 
     assert_equal __([0, 2]), enums
   end
 
@@ -38,7 +38,7 @@ class AboutLazy < Neo::Koan
 
     enums = []
     # How can we assure that this does not go into an infinite loop?
-    num.enum_for(:evens).__(lazy).select{|i| i < 5 }.take(3).each{|i| enums << i} 
+    num.enum_for(:even).__(lazy).select{|i| i < 5 }.take(3).each{|i| enums << i} 
     assert_equal __([0, 2, 4]), enums
 	end
 end
