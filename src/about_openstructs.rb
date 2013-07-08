@@ -42,14 +42,12 @@ class AboutOpenStructs < Neo::Koan
     assert_equal __(Hash), Hash(person).class
   end
 
-  # def test_hash_conversions_from_struct
-  #   person = Struct.new(:name => "Joe", :age => 25, :siblings => 3)
+   def test_hash_conversions_from_struct
+     Person = Struct.new(:name, :age, :siblings)
+     person = Person.new("Joe", 25, 3)
 
-  #   assert_equal __(Hash), person.to_h.class
-  #   assert_equal __(Hash), Hash(person).class
-  # end
-  
-  # It turns out Structs don't behave this way, and we need to add them
-  # separately (maybe to a file of their own?)
+     assert_equal __(Hash), person.to_h.class
+     assert_raise (__(TypeError)), Hash(person).class
+   end
 
 end
