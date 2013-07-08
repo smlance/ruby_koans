@@ -42,12 +42,18 @@ class AboutOpenStructs < Neo::Koan
     assert_equal __(Hash), Hash(person).class
   end
 
-   def test_hash_conversions_from_struct
-     Person = Struct.new(:name, :age, :siblings)
-     person = Person.new("Joe", 25, 3)
+  Person = Struct.new(:name, :age, :siblings)
 
-     assert_equal __(Hash), person.to_h.class
-     assert_raise (__(TypeError)), Hash(person).class
-   end
+  def test_hash_conversions_from_struct
+    person = Person.new("Joe", 25, 3)
+
+    assert_equal __(Hash), person.to_h.class
+
+    # Maybe add this to another koan or a hint suggesting that you can't
+    # convert a Struct to a Hash using Hash()?
+    assert_raise (__(TypeError)) do
+      Hash(person).class
+    end
+  end
 
 end
