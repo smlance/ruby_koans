@@ -18,13 +18,13 @@ class AboutLazyEnumeration < Neo::Koan
     range = 1..Float::INFINITY
     collection = range.lazy.collect{ |x| x }.first(5)
     # collection is an array
-    assert_equal __([1, 2, 3, 4, 5]), collection
+    assert_equal __, collection
   end 
 
   def test_files
     file = 'example_file.txt'
     lines = File.open(file).lazy.each.map(&:chomp).reject(&:empty?).take(3).force
-    assert_equal __(["this", "is", "a"]), lines
+    assert_equal __, lines
   end
 
   def test_lazy_select
@@ -32,15 +32,15 @@ class AboutLazyEnumeration < Neo::Koan
 
     enums = []
     num.enum_for(:even).lazy.select{|i| i < 3 }.take(2).each{|i| enums << i} 
-    assert_equal __([0, 2]), enums
+    assert_equal __, enums
   end
 
   def test_lazy_again
     num = Num.new
 
     enums = []
-    # How can we assure that this does not go into an infinite loop?
-    num.enum_for(:even).__(lazy).select{|i| i < 5 }.take(3).each{|i| enums << i} 
-    assert_equal __([0, 2, 4]), enums
+    # How can we ensure that this does not go into an infinite loop?
+    num.enum_for(:even).__.select{|i| i < 5 }.take(3).each{|i| enums << i} 
+    assert_equal __, enums
   end
 end
