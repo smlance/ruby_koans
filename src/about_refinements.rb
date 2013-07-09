@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 # Maybe include a real monkeypatching instance (like refining String
-# or FixNum for some purpose.)
+# or FixNum for some purpose).
 
 module ActsLikeTiger
   # We will add to this module below.
