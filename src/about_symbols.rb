@@ -97,4 +97,23 @@ class AboutSymbols < Neo::Koan
   # THINK ABOUT IT:
   #
   # Why is it not a good idea to dynamically create a lot of symbols?
+
+  in_ruby_version("2.0") do
+
+    def test_symbol_array_literals
+      item = %i{ monday tuesday wednesday }
+      assert_equal __([:monday, :tuesday, :wednesday]), item
+
+      item = %i{ monday, tuesday, wednesday }
+      assert_equal __([:"monday,", :"tuesday,", :wednesday]), item
+    end
+
+    def test_symbol_array_literals_with_interpolation
+      item = %I{ #{"monday" + " tuesday"} wednesday }
+      # Note the capital 'i' for interpolation!
+      assert_equal __([:"monday tuesday", :wednesday]), item
+    end
+
+  end
+
 end
