@@ -60,4 +60,32 @@ class AboutModules < Neo::Koan
     fido = Dog.new
     assert_equal __(:in_object), fido.here
   end
+
+  in_ruby_version("2.0") do
+
+    class Dog2
+      prepend Nameable
+
+      attr_reader :name
+
+      def initialize
+        @name = "Fido"
+      end
+
+      def bark
+        "WOOF"
+      end
+
+      def here
+        :in_object
+      end
+    end
+
+    def test_prepended_module_methods_override_class_methods
+      fido = Dog2.new
+      assert_equal __(:in_module), fido.here
+    end
+
+  end
+
 end
