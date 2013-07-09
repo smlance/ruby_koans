@@ -25,6 +25,12 @@ class AboutLazy < Neo::Koan
     assert_equal __(["this", "is", "a"]), lines
 	end
 
+  def test_size
+    array = [1, 2, 3, 4]
+    size = array.cycle(4).size
+    assert_equal __(16), size
+  end
+
 	def test_lazy_select
     num = Num.new
 
