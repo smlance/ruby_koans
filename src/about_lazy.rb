@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 class AboutLazyEnumeration < Neo::Koan
 
   class Num
-
     def even
       i = 0
       loop do
@@ -11,7 +10,6 @@ class AboutLazyEnumeration < Neo::Koan
         i += 2 
       end
     end
-
   end
 
   def test_infinite_range 
