@@ -19,7 +19,7 @@ class AboutVariableScope < Neo::Koan
     assert_equal __("ruff!"), joe.bark
   end
 
-  class Cat
+  class Mouse
     @@total = 0
     def initialize(n)
       @name = n 
@@ -30,26 +30,24 @@ class AboutVariableScope < Neo::Koan
       @name
     end
 
-    # def meow
-    #   return "meow"
-    # end
-
-    def Cat.count
+    def Mouse.count
       @@total
     end
   end
 
   def test_instance_variable 
-    oscar = Cat.new("oscar")
+    oscar = Mouse.new("oscar")
     assert_equal __("oscar"), oscar.name 
   end
 
   def test_class_variable
-    (1..10).each { |i| Cat.new("#{i}") }
-    assert_equal __(10), test_we_can_get_barking_by_making_new_classt.count
+    (1..9).each { |i| Mouse.new("#{i}") }
+    # Be careful. How many mice did we create altogether? 
+    # Hint:  
+    assert_equal __(10), Mouse.count
   end
 
   # Meditate on the following: 
   # What is the difference between a class variable and instance variable?
-  # 
+  
 end
