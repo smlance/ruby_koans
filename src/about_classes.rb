@@ -187,4 +187,22 @@ class AboutClasses < Neo::Koan
     assert_equal __('"STRING"'), "STRING".inspect
   end
 
+  in_ruby_version("2") do
+
+    def test_struct_new_automatically_makes_accessors
+      # Change this so it's not a copy from the Ruby Docs
+      Customer = Struct.new(:name, :address) do
+        def greeting
+          "Hello #{name}!"
+        end
+      end
+
+      dave = Customer.new("Dave", "123 Main")
+      # Add appropriate tests here
+      dave.name     #=> "Dave"
+      dave.greeting #=> "Hello Dave!"
+    end
+
+  end
+
 end
