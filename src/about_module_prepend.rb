@@ -13,11 +13,6 @@ class AboutModulePrepend < Neo::Koan
     end
   end
 
-  def test_cant_instantiate_modules
-    assert_raise(___(NoMethodError)) do
-      Nameable.new
-    end
-  end
   # End of copied region
   # ------------------------------------------------------------------
 
