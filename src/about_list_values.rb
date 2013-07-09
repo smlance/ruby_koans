@@ -14,38 +14,36 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 class AboutListValues < Neo::Koan
 
-  def test_out_of_range_value_returns_nil
-    array = [1, 2, 3, 4, 5]
+  array = [1, 2, 3, 4, 5]
 
-    array_a = array.values_at(3..5)
-    assert_equal __([4, 5, nil]), array_a
+  def test_out_of_range_value_returns_nil
+    a = array.values_at(3..5)
+    assert_equal __([4, 5, nil]), a
   end
     
   def test_out_of_range_values_returns_nil
-    array_b = array.values_at(3..7)
-    assert_equal __([4, 5, nil, nil, nil]), array_b
-    # Maybe change modified array names? -> Look at the Ruby Koans convention
-    # for this.
+    a = array.values_at(3..7)
+    assert_equal __([4, 5, nil, nil, nil]), a
 
-    array_c = array.values_at(0, 1, 5, 6)
-    assert_equal __([1, 2, nil, nil]), array_c
+    b = array.values_at(0, 1, 5, 6)
+    assert_equal __([1, 2, nil, nil]), b
 
-    array_d = array.values_at(3..5, 1..-2)
-    assert_equal __([4, 5, nil, 2, 3, 4]), array_d
+    c = array.values_at(3..5, 1..-2)
+    assert_equal __([4, 5, nil, 2, 3, 4]), c
   end
 
   def test_out_of_range_hash_values_also_return_nil
     hash = { :one => "uno", :two => "dos" }
     assert_equal __(["uno", "dos"]), hash.values
 
-    array_e = hash.values_at(:one, :two)
-    assert_equal __(["uno", "dos"]), array_e
+    a = hash.values_at(:one, :two)
+    assert_equal __(["uno", "dos"]), a
 
-    array_f = hash.values_at(:one, :two, :three)
-    assert_equal __(["uno", "dos", "tres"]), array_f
+    b = hash.values_at(:one, :two, :three)
+    assert_equal __(["uno", "dos", "tres"]), b
 
-    array_g = hash.values_at(:one, :two, :three, :four)
-    assert_equal __(["uno", "dos", "tres"]), array_g
+    c = hash.values_at(:one, :two, :three, :four)
+    assert_equal __(["uno", "dos", "tres"]), c
   end
 
 end
