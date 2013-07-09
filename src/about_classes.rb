@@ -191,6 +191,7 @@ class AboutClasses < Neo::Koan
 
     def test_struct_new_automatically_makes_accessors
       # Change this so it's not a copy from the Ruby Docs
+      # Source: http://www.ruby-doc.org/core-2.0/Struct.html
       Customer = Struct.new(:name, :address) do
         def greeting
           "Hello #{name}!"
