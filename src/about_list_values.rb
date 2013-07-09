@@ -14,14 +14,16 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 class AboutListValues < Neo::Koan
 
-  array = [1, 2, 3, 4, 5]
-
   def test_out_of_range_value_returns_nil
+    array = [1, 2, 3, 4, 5]
+
     a = array.values_at(3..5)
     assert_equal __([4, 5, nil]), a
   end
     
   def test_out_of_range_values_returns_nil
+    array = [1, 2, 3, 4, 5]
+
     a = array.values_at(3..7)
     assert_equal __([4, 5, nil, nil, nil]), a
 
