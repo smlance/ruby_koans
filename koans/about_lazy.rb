@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 class AboutLazyEnumeration < Neo::Koan
 
   class Num
-
     def even
       i = 0
       loop do
@@ -11,7 +10,6 @@ class AboutLazyEnumeration < Neo::Koan
         i += 2 
       end
     end
-
   end
 
   def test_infinite_range 
@@ -27,9 +25,14 @@ class AboutLazyEnumeration < Neo::Koan
     assert_equal __, lines
   end
 
-  def test_lazy_select
-    num = Num.new
+  def test_size
+    array = [1, 2, 3, 4]
+    size = array.cycle(4).size
+    assert_equal __, size
+  end
 
+	def test_lazy_select
+    num = Num.new
     enums = []
     num.enum_for(:even).lazy.select{|i| i < 3 }.take(2).each{|i| enums << i} 
     assert_equal __, enums
@@ -37,9 +40,8 @@ class AboutLazyEnumeration < Neo::Koan
 
   def test_lazy_again
     num = Num.new
-
     enums = []
-    # How can we ensure that this does not go into an infinite loop?
+    # How can we assure that this does not go into an infinite loop?
     num.enum_for(:even).__.select{|i| i < 5 }.take(3).each{|i| enums << i} 
     assert_equal __, enums
   end
