@@ -187,23 +187,40 @@ class AboutClasses < Neo::Koan
     assert_equal __('"STRING"'), "STRING".inspect
   end
 
-  in_ruby_version("2") do
+  def test_struct_new_automatically_makes_accessors
+    # Change this so it's not a copy from the Ruby Docs
+    # Source: http://www.ruby-doc.org/core-2.0/Struct.html
 
-    def test_struct_new_automatically_makes_accessors
-      # Change this so it's not a copy from the Ruby Docs
-      # Source: http://www.ruby-doc.org/core-2.0/Struct.html
-      Customer = Struct.new(:name, :address) do
-        def greeting
-          "Hello #{name}!"
-        end
+    Person = Struct.new(:name, :age) do
+      def say_hello
+        "Hello, #{name}."
       end
-
-      dave = Customer.new("Dave", "123 Main")
-      # Add appropriate tests here
-      dave.name     #=> "Dave"
-      dave.greeting #=> "Hello Dave!"
     end
 
+    jim = Person.new("Jim", 44)
+
+    assert_equal __("Jim"), jim.name
+    assert_equal __(44), jim.age
+    
   end
+
+  def test_structs_act_like_classes
+
+    Person = Struct.new(:name, :age) do
+      def say_hello
+        "Hello, #{name}."
+      end
+    end
+
+    jim = Person.new("Jim", 44)
+
+    assert_equal __("Hello, Jim."), jim.say_hello
+
+  end
+
+  # THINK ABOUT IT:
+  #
+  # How is creating and using a Class-like Struct with Struct.new
+  # different than creating and using a Class?
 
 end
