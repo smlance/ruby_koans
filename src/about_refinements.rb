@@ -8,9 +8,6 @@ module ActsLikeTiger
 end
 
 class Dog
-  
-  include ActsLikeTiger
-  # What will the ActsLikeTiger module do to instances of Dog?
 
   attr_reader :name
 
