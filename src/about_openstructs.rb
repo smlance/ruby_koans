@@ -86,7 +86,7 @@ class AboutOpenStructs < Neo::Koan
     assert_equal __("#<OpenStruct age=25>"), person.inspect
   end
 
-  def test_struct_attributes_but_not_structs_can_be_modified_after_creation
+  def test_struct_attributes_but_not_members_can_be_modified_after_creation
     person = Person.new("Simon", 30, 4)
 
     person.name = "Chloe"
