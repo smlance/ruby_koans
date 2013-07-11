@@ -9,6 +9,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 class AboutLazyEnumeration < Neo::Koan
 
   class Num
+
     def even
       i = 0
       loop do
@@ -16,19 +17,22 @@ class AboutLazyEnumeration < Neo::Koan
         i += 2 
       end
     end
+
   end
- 
+  
   def test_large_range_without_lazy # Move to different file? To show time?
-    range = (1..19999999)
+    range = (1..10**7)
     array = range.select{|n| n % 2 == 0 }.first(5)
+
     assert_equal __([2,4,6,8,10]), array
     # Meditate on how long it took to return an answer. 
     # We can surely be lazier than that.
   end
 
   def test_large_range_with_lazy 
-    range = (1..19999999).__(lazy)
+    range = (1..10**7).__(lazy)
     array = range.select{|n| n % 2 == 0 }.first(5)
+
     assert_equal __([2,4,6,8,10]), array
     # Much better timing. 
   end
@@ -37,20 +41,29 @@ class AboutLazyEnumeration < Neo::Koan
     range = 1..Float::INFINITY
     # To be lazy or not to be lazy, that is the question.
     collection = range.__(lazy).collect{ |x| x }.first(5)
+
     # collection is an array
     assert_equal __([1, 2, 3, 4, 5]), collection
   end 
 
   def test_size
     array = [1, 2, 3, 4]
-    size = (array * 2).size
-    assert_equal __(8), size
+
+    array_size = (array * 2).size
+    assert_equal __(8), array_size
   end
 
-	def test_lazy_select
+  def test_lazy_select
     num = Num.new
     enums = []
     enums = num.enum_for(:even).__(lazy).select{|i| i < 3 }.first(2)
+
     assert_equal __([0, 2]), enums
+
+    # THINK ABOUT IT:
+    #
+    # What would happen if we didn't use lazy in the above selection?
+    # Why is lazy necessary?
   end
+
 end
