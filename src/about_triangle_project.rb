@@ -1,7 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 # You need to write the triangle method in the file 'triangle.rb'
-require_relative 'triangle.rb'
+in_ruby_version("1.9", "2.0") do
+  require_relative 'triangle.rb'
+end
+
+in_ruby_version("1.8") do
+  require 'triangle.rb'
+end
 
 class AboutTriangleProject < Neo::Koan
   def test_equilateral_triangles_have_equal_sides
